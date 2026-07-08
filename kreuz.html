@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KREUZ | Premium Streetwear</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --blanco: #FFFFFF;
+            --gris-claro: #F9F9F9;
+            --gris-borde: #EEEEEE;
+            --negro: #0B0B0B;
+            --rojo-porsche: #E50012;
+            --fuente-titulos: 'Syne', sans-serif;
+            --fuente-cuerpo: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth; /* Desplazamiento suave entre links */
+        }
+
+        body {
+            font-family: var(--fuente-cuerpo);
+            background-color: var(--blanco);
+            color: var(--negro);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* Barra de Anuncio */
+        .announcement-bar {
+            background-color: var(--negro);
+            color: var(--blanco);
+            text-align: center;
+            padding: 10px 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: var(--blanco);
+            border-bottom: 1px solid var(--gris-borde);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-family: var(--fuente-titulos);
+            font-weight: 800;
+            font-size: 1.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .nav-menu a:hover { color: var(--rojo-porsche); transition: color 0.3s; }
+
+        .nav-icons { display: flex; gap: 20px; font-weight: 600; font-size: 0.9rem; }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 75vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--blanco);
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-family: var(--fuente-titulos);
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .hero p { font-size: 1.1rem; max-width: 600px; margin-bottom: 35px; opacity: 0.9; }
+
+        .hero-ctas { display: flex; gap: 20px; }
+
+        .btn {
+            padding: 16px 32px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn-primary { background-color: var(--rojo-porsche); color: var(--blanco); }
+        .btn-primary:hover { background-color: var(--negro); }
+        .btn-secondary { border: 2px solid var(--blanco); color: var(--blanco); }
+        .btn-secondary:hover { background-color: var(--blanco); color: var(--negro); }
+
+        /* Sección Catálogo Drop (NUEVA) */
+        .drop-section {
+            padding: 80px 5%;
+            background-color: var(--blanco);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header .tag {
+            color: var(--rojo-porsche);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .section-header h2 {
+            font-family: var(--fuente-titulos);
+            font-size: 2.5rem;
+            text-transform: uppercase;
+        }
+
+        /* Grid de Productos */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--blanco);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--gris-borde);
+            padding: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Etiqueta Pre-venta */
+        .badge {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            background-color: var(--negro);
+            color: var(--blanco);
+            padding: 6px 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            z-index: 10;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 380px;
+            background-color: #F0F0F0;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .product-info {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            letter-spacing: 0.02em;
+        }
+
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--negro);
+            margin-bottom: 15px;
+        }
+
+        /* Selector de Tallas UX */
+        .size-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .size-btn {
+            width: 35px;
+            height: 35px;
+            border: 1px solid #CCCCCC;
+            background: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .size-btn:hover, .size-btn.active {
+            background-color: var(--negro);
+            color: var(--blanco);
+            border-color: var(--negro);
+        }
+
+        .btn-add-to-cart {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--negro);
+            color: var(--blanco);
+            border: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+
+        .btn-add-to-cart:hover {
+            background-color: var(--rojo-porsche);
+        }
+
+        /* Bloques Divididos de Colección abajo */
+        .collections-grid { display: flex; flex-wrap: wrap; width: 100%; }
+        .collection-card {
+            flex: 1; min-width: 50%; height: 50vh; position: relative;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 50px; color: var(--blanco); overflow: hidden;
+        }
+        .card-daredevil { background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat; }
+        .card-turkish { background: linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1558769132-cb1aea458c5e?q=80&w=1974&auto=format&fit=crop') center/cover no-repeat; }
+        .collection-card h2 { font-family: var(--fuente-titulos); font-size: 2.2rem; text-transform: uppercase; margin-bottom: 10px; }
+        .collection-card p { font-size: 0.95rem; max-width: 400px; margin-bottom: 20px; opacity: 0.85; }
+        .btn-link { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; border-bottom: 2px solid var(--blanco); width: fit-content; padding-bottom: 5px; }
+        .collection-card:hover .btn-link { color: var(--rojo-porsche); border-color: var(--rojo-porsche); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.3rem; }
+            .hero-ctas { flex-direction: column; gap: 10px; width: 100%; }
+            .btn { text-align: center; }
+            .collection-card { min-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Barra de Anuncio -->
+    <div class="announcement-bar">
+        ⚡ DROP 01: DARE DEVIL PRE-VENTA ACTIVA | ENVÍO GRATIS DISPONIBLE
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">KREUZ</div>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#dare-devil-drop">Dare Devil</a></li>
+                <li><a href="#essentials">Essentials</a></li>
+            </ul>
+        </nav>
+        <div class="nav-icons">
+            <a href="#">🔍</a>
+            <a href="#">🛒 (0)</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>LA VELOCIDAD TIENE TEXTURA</h1>
+        <p>Streetwear de corte premium y algodón de alta densidad. Diseñado para el asfalto, confeccionado con lujo textil.</p>
+        <div class="hero-ctas">
+            <!-- El href="#dare-devil-drop" hace la magia de mover la pantalla -->
+            <a href="#dare-devil-drop" class="btn btn-primary">Comprar Dare Devil</a>
+            <a href="#essentials" class="btn btn-secondary">Explorar Essentials</a>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE PRODUCTOS: DROP DARE DEVIL (NUEVA) -->
+    <section id="dare-devil-drop" class="drop-section">
+        <div class="section-header">
+            <span class="tag">Drop 01 // Edición Limitada</span>
+            <h2>Colección 'Dare Devil'</h2>
+        </div>
+
+        <div class="products-grid">
+            
+            <!-- Producto 1: Playera Estrella Blanca -->
+            <div class="product-card">
+                <span class="badge">Pre-Venta</span>
+                <!-- Imagen temporal, simula el lienzo blanco y look urbano -->
+                <img class="product-image" src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1974&auto=format&fit=crop" alt="Playera Porsche 911">
+                <div class="product-info">
+                    <h3 class="product-title">Playera Oversized '911 Carrera' - Off White</h3>
+                    <span class="product-price">$799 MXN</span>
+                    <div class="size-selector">
+                        <button class="size-btn">S</button>
+                        <button class="size-btn">M</button>
+                        <button class="size-btn active">L</button>
+                        <button class="size-btn">XL</button>
+                    </div>
+                    <button class="btn-add-to-cart">Asegurar Pieza</button>
+                </div>
+            </div>
+
+            <!-- Producto 2: Playera Negra -->
+            <div class="product-card">
+                <span class="badge">Pre-Venta</span>
+                <img class="product-image" src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=1974&auto=format&fit=crop" alt="Playera Monza Noir">
+                <div class="product-info">
+                    <h3 class="product-title">Playera Oversized 'Monza Circuit' - Pitch Black</h3>
+                    <span class="product-price">$799 MXN</span>
+                    <div class="size-selector">
+                        <button class="size-btn">S</button>
+                        <button class="size-btn">M</button>
+                        <button class="size-btn">L</button>
+                        <button class="size-btn">XL</button>
+                    </div>
+                    <button class="btn-add-to-cart">Asegurar Pieza</button>
+                </div>
+            </div>
+
+            <!-- Producto 3: Hoodie -->
+            <div class="product-card">
+                <span class="badge">Pre-Venta</span>
+                <img class="product-image" src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=1970&auto=format&fit=crop" alt="Hoodie Dare Devil">
+                <div class="product-info">
+                    <h3 class="product-title">Hoodie Heavyweight 'Dare Devil' - Ash Grey</h3>
+                    <span class="product-price">$1,499 MXN</span>
+                    <div class="size-selector">
+                        <button class="size-btn">S</button>
+                        <button class="size-btn">M</button>
+                        <button class="size-btn">L</button>
+                        <button class="size-btn">XL</button>
+                    </div>
+                    <button class="btn-add-to-cart">Asegurar Pieza</button>
+                </div>
+            </div>
+
+            <!-- Producto 4: Pants -->
+            <div class="product-card">
+                <span class="badge">Pre-Venta</span>
+                <img class="product-image" src="https://images.unsplash.com/photo-1551854838-212c50b4c184?q=80&w=1974&auto=format&fit=crop" alt="Jogger Heavyweight">
+                <div class="product-info">
+                    <h3 class="product-title">Jogger Baggy 'Industrial' - Heavy Black</h3>
+                    <span class="product-price">$1,299 MXN</span>
+                    <div class="size-selector">
+                        <button class="size-btn">S</button>
+                        <button class="size-btn">M</button>
+                        <button class="size-btn">L</button>
+                        <button class="size-btn">XL</button>
+                    </div>
+                    <button class="btn-add-to-cart">Asegurar Pieza</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Enlaces visuales de colecciones al final para balancear el diseño -->
+    <section id="essentials" class="collections-grid">
+        <div class="collection-card card-daredevil">
+            <h2>Dare Devil</h2>
+            <p>Estética de circuito, actitud de calle.</p>
+            <a href="#dare-devil-drop" class="btn-link">Ver Catálogo Completo</a>
+        </div>
+        <div class="collection-card card-turkish">
+            <h2>Turkish Luxury / Essentials</h2>
+            <p>Próximamente. El estándar de oro del algodón importado.</p>
+            <span class="btn-link" style="border:none; color:#AAA;">Drop en Camino</span>
+        </div>
+    </section>
+
+</body>
+</html>
